@@ -1,0 +1,54 @@
+﻿@model IEnumerable<AppBiblioteca2021.Models.Prestamos>
+
+
+<h2>Préstamos</h2>
+
+<p>
+    <a class="btn btn-outline-info" href="~/Prestamos/Create"><i class="fa fa-plus-square"></i> Nuevo Préstamo</a>
+</p>
+<table class="table table-bordered table-hover table-sm">
+    <tr style=" color: white; background-color: #401e19;">
+        <th>
+            @Html.DisplayNameFor(model => model.Socios.SociosNombreCompleto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PrestamosFecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PrestamosFechaDevolucion)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Socios.SociosNombreCompleto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrestamosFecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrestamosFechaDevolucion)
+            </td>
+            <td class="text-right">
+                <a class="btn btn-outline-dark" href="~/Prestamos/Details/@item.PrestamosID"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Detalles</a>
+                @*<a class="btn btn-outline-danger" onclick="EliminarPrestamo(@item.PrestamosID)"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</a>*@
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section Scripts{
+    <script>
+        function EliminarPrestamo(prestamoID) {
+            var eliminar = confirm("¿Está seguro de eliminar a este prestamo?");
+            alert(eliminar);
+            if (eliminar == true) {
+                location.href = "../../Prestamos/DeleteConfirmed/" + prestamoID;
+            }
+        }
+    </script>
+}

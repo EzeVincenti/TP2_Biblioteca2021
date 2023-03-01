@@ -1,0 +1,65 @@
+﻿@model IEnumerable<AppBiblioteca2021.Models.Autores>
+
+
+<h2>Autores</h2>
+
+<p>
+    <a class="btn btn-outline-info" href="~/Autores/Create"><i class="fa fa-plus-square"></i> Nuevo Autor</a>
+</p>
+
+@*ALERTA DE NO PODER ELIMINAR*@
+
+@if (ViewBag.MensajeDevuelto != null)
+{
+    <div class="alert alert-warning" role="alert">
+        @ViewBag.MensajeDevuelto
+    </div>
+}
+
+
+<table class="table table-bordered table-hover table-sm ">
+        <tr style=" color: white; background-color: #401e19;">
+            <th>
+                @Html.DisplayNameFor(model => model.AutoresNombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AutoresApellido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AutoresNombreCompleto)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AutoresNombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AutoresApellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AutoresNombreCompleto)
+                </td>
+                <td class="text-right">
+                    <a class="btn btn-outline-dark" href="~/Autores/Edit/@item.AutoresID"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Modificar</a>
+                    <a class="btn btn-outline-danger" onclick="EliminarAutor(@item.AutoresID)"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</a>
+                </td>
+            </tr>
+        }
+
+</table>
+
+@section Scripts{
+    <script>
+        function EliminarAutor(autorID) {
+            var eliminar = confirm("¿Está seguro de eliminar a este Autor?");
+            alert(eliminar);
+            if (eliminar == true) {
+                location.href = "../../Autores/DeleteConfirmed/" + autorID;
+            }
+        }
+    </script>
+}

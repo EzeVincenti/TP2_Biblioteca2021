@@ -1,0 +1,50 @@
+﻿@model IEnumerable<AppBiblioteca2021.Models.Editoriales>
+
+<h2>Editoriales</h2>
+
+<p>
+    <a class="btn btn-outline-info" href="~/Editoriales/Create"><i class="fa fa-plus-square"></i> Nueva Editorial</a>
+</p>
+
+@*ALERTA DE NO PODER ELIMINAR*@
+
+@if (ViewBag.MensajeDevuelto != null)
+{
+    <div class="alert alert-warning" role="alert">
+        @ViewBag.MensajeDevuelto
+    </div>
+}
+
+<table class="table table-bordered table-hover table-sm">
+    <tr style=" color: white; background-color: #401e19;">
+        <th>
+            @Html.DisplayNameFor(model => model.EditorialesNombre)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EditorialesNombre)
+            </td>
+            <td class="text-right">
+                <a class="btn btn-outline-dark" href="~/Editoriales/Edit/@item.EditorialesID"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Modificar</a>
+                <a class="btn btn-outline-danger" onclick="EliminarEditorial(@item.EditorialesID)"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</a>
+            </td>
+        </tr>
+    }
+
+</table>
+@section Scripts{
+    <script>
+        function EliminarEditorial(editorialID) {
+            var eliminar = confirm("¿Está seguro de eliminar a esta Editorial?");
+            alert(eliminar);
+            if (eliminar == true) {
+                location.href = "../../Editoriales/DeleteConfirmed/" + editorialID;
+            }
+        }
+    </script>
+}

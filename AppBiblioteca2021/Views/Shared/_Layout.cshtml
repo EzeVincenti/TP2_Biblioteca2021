@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> App Biblioteca 2021</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            @Html.ActionLink("Nombre de la aplicación", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                        </div>
+                        <div class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav">
+                                <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+                                <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
+                                <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+                            </ul>
+                            @Html.Partial("_LoginPartial")
+                        </div>
+                    </div>
+        Devoluciones
+                </div>*@
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #fbc6a4;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="~/Home/Index">
+                <i class="fa fa-graduation-cap" aria-hidden="true"></i> App Biblioteca 2021
+            </a>
+            @*<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>*@
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            <div class="collapse navbar-collapse text-center" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="~/Home/Index"> Inicio </a></li>
+                    <li class="nav-item"><a class="nav-link" href="~/Autores/Index"> Autores </a></li>
+                    <li class="nav-item"><a class="nav-link" href="~/Libros/Index"> Libros </a></li>
+                    <li class="nav-item"><a class="nav-link" href="~/Secciones/Index"> Secciones </a></li>
+                    <li class="nav-item"><a class="nav-link" href="~/Editoriales/Index"> Editoriales </a></li>
+                    <li class="nav-item"><a class="nav-link" href="~/Generos/Index"> Generos </a></li>
+                    <li class="nav-item"><a class="nav-link" href="~/Socios/Index"> Socios </a></li>
+                    <li class="nav-item"><a class="nav-link" href="~/Prestamos/Index"> Prestamos </a></li>
+                    <li class="nav-item"><a class="nav-link" href="~/Devoluciones/Index"> Devoluciones </a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content mt-4" >
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - App Biblioteca 2021</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

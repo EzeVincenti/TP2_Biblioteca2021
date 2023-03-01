@@ -1,0 +1,64 @@
+﻿@model AppBiblioteca2021.Models.Socios
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Socios</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SociosNombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SociosNombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SociosApellido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SociosApellido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SociosDireccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SociosDireccion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SociosTelefono)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SociosTelefono)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SociosFechaNacimiento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SociosFechaNacimiento)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

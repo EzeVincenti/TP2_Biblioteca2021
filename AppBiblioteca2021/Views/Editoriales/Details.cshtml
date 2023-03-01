@@ -1,0 +1,26 @@
+﻿@model AppBiblioteca2021.Models.Editoriales
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Editoriales</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EditorialesNombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EditorialesNombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.EditorialesID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

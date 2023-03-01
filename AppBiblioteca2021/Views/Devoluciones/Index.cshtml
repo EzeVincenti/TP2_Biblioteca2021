@@ -1,0 +1,35 @@
+﻿@model IEnumerable<AppBiblioteca2021.Models.Devoluciones>
+
+
+<h2>Devoluciones</h2>
+
+<p>
+    <a class="btn btn-outline-info" href="~/Devoluciones/Create"><i class="fa fa-plus-square"></i> Devolución</a>
+</p>
+<table class="table table-bordered table-hover table-sm">
+    <tr style=" color: white; background-color: #401e19;">
+        <th>
+            @Html.DisplayNameFor(model => model.Socios.SociosNombreCompleto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DevolucionesFecha)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Socios.SociosNombreCompleto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DevolucionesFecha)
+        </td>
+        <td class="text-right">
+            <a class="btn btn-outline-dark" href="~/Devoluciones/Details/@item.DevolucionesID"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Detalles</a>
+            @*@Html.ActionLink("Delete", "Delete", new { id = item.DevolucionesID })*@
+        </td>
+    </tr>
+}
+
+</table>

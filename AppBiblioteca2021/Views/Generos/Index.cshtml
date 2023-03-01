@@ -1,0 +1,52 @@
+﻿@model IEnumerable<AppBiblioteca2021.Models.Generos>
+
+
+<h2>Géneros</h2>
+
+<p>
+    <a class="btn btn-outline-info" href="~/Generos/Create"><i class="fa fa-plus-square"></i> Nuevo Género</a>
+</p>
+
+@*ALERTA DE NO PODER ELIMINAR*@
+
+@if (ViewBag.MensajeDevuelto != null)
+{
+    <div class="alert alert-warning" role="alert">
+        @ViewBag.MensajeDevuelto
+    </div>
+}
+
+<table class="table table-bordered table-hover table-sm">
+    <tr style=" color: white; background-color: #401e19;">
+        <th>
+            @Html.DisplayNameFor(model => model.GenerosNombre)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.GenerosNombre)
+            </td>
+            <td class="text-right">
+                <a class="btn btn-outline-dark" href="~/Generos/Edit/@item.GenerosID"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Modificar</a>
+                <a class="btn btn-outline-danger" onclick="EliminarGenero(@item.GenerosID)"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section Scripts{
+    <script>
+        function EliminarGenero(generoID) {
+            var eliminar = confirm("¿Está seguro de eliminar a este género?");
+            alert(eliminar);
+            if (eliminar == true) {
+                location.href = "../../Generos/DeleteConfirmed/" + generoID;
+            }
+        }
+    </script>
+}

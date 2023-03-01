@@ -1,0 +1,60 @@
+﻿@model AppBiblioteca2021.Models.Prestamos
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Prestamos</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.PrestamosID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PrestamosFecha, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.EditorFor(model => model.PrestamosFecha, new { htmlAttributes = new { @class = "form-control" } })*@
+                <input type="date" name="PrestamosFecha" class="form-control" value="@Model.PrestamosFecha.ToString("yyyy-MM-dd")" />
+                @Html.ValidationMessageFor(model => model.PrestamosFecha, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PrestamosFechaDevolucion, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.EditorFor(model => model.PrestamosFechaDevolucion, new { htmlAttributes = new { @class = "form-control" } })*@
+                <input type="date" name="PrestamosFechaDevolucion" class="form-control" value="@Model.PrestamosFechaDevolucion.ToString("yyyy-MM-dd")" />
+                @Html.ValidationMessageFor(model => model.PrestamosFechaDevolucion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SociosID, "SociosID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("SociosID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.SociosID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

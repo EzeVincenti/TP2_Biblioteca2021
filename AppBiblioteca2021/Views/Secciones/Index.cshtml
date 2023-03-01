@@ -1,0 +1,54 @@
+﻿@model IEnumerable<AppBiblioteca2021.Models.Secciones>
+
+
+
+<h2>Secciones</h2>
+
+<p>
+    <a class="btn btn-outline-info" href="~/Secciones/Create"><i class="fa fa-plus-square"></i> Nueva Sección</a>
+</p>
+
+@*ALERTA DE NO PODER ELIMINAR*@
+
+@if (ViewBag.MensajeDevuelto != null)
+{
+    <div class="alert alert-warning" role="alert">
+        @ViewBag.MensajeDevuelto
+    </div>
+}
+
+
+
+<table class="table table-bordered table-hover table-sm">
+    <tr style=" color: white; background-color: #401e19;">
+        <th>
+            @Html.DisplayNameFor(model => model.SeccionesNombre)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SeccionesNombre)
+            </td>
+            <td class="text-right">
+                <a class="btn btn-outline-dark" href="~/Secciones/Edit/@item.SeccionesID"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Modificar</a>
+                <a class="btn btn-outline-danger" onclick="EliminarSeccion(@item.SeccionesID)"><i class="fa fa-trash" aria-hidden="true"></i>  Eliminar</a>
+            </td>
+        </tr>
+    }
+
+</table>
+@section Scripts{
+    <script>
+        function EliminarSeccion(seccionID) {
+            var eliminar = confirm("¿Está seguro de eliminar a esta Sección?");
+            alert(eliminar);
+            if (eliminar == true) {
+                location.href = "../../Secciones/DeleteConfirmed/" + seccionID;
+            }
+        }
+    </script>
+}

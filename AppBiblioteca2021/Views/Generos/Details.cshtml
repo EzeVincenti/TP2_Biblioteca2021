@@ -1,0 +1,26 @@
+﻿@model AppBiblioteca2021.Models.Generos
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Generos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GenerosNombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GenerosNombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.GenerosID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

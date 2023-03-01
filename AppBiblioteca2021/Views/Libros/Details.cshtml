@@ -1,0 +1,90 @@
+﻿@model AppBiblioteca2021.Models.Libros
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Libros</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Autores.AutoresNombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Autores.AutoresNombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Editoriales.EditorialesNombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Editoriales.EditorialesNombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Generos.GenerosNombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Generos.GenerosNombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Secciones.SeccionesNombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Secciones.SeccionesNombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LibrosISBN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LibrosISBN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LibrosTitulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LibrosTitulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LibrosResenia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LibrosResenia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LibrosFechaPublicacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LibrosFechaPublicacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EstadoLibros)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstadoLibros)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.LibrosID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

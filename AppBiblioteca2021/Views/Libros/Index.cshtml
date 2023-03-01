@@ -1,0 +1,86 @@
+﻿@model IEnumerable<AppBiblioteca2021.Models.Libros>
+
+
+
+<h2>Libros</h2>
+
+<p>
+    <a class="btn btn-outline-info" href="~/Libros/Create"><i class="fa fa-plus-square"></i> Nuevo Libro</a>
+</p>
+<table class="table table-bordered table-hover table-sm">
+    <tr style=" color: white; background-color: #401e19;">
+        <th>
+            @Html.DisplayNameFor(model => model.Autores.AutoresNombreCompleto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LibrosTitulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Editoriales.EditorialesNombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Generos.GenerosNombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Secciones.SeccionesNombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LibrosISBN)
+        </th>
+
+        <th class="ocultar600">
+            @Html.DisplayNameFor(model => model.LibrosFechaPublicacion)
+        </th>
+        <th class="ocultar830">
+            @Html.DisplayNameFor(model => model.EstadoLibros)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Autores.AutoresNombreCompleto)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.LibrosTitulo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Editoriales.EditorialesNombre)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Generos.GenerosNombre)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Secciones.SeccionesNombre)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.LibrosISBN)
+    </td>
+
+    <td class="ocultar600">
+        @Html.DisplayFor(modelItem => item.LibrosFechaPublicacion)
+    </td>
+    <td class="ocultar830">
+        @Html.DisplayFor(modelItem => item.EstadoLibros)
+    </td>
+    <td class="text-right">
+        <a class="btn btn-outline-dark" href="~/Libros/Edit/@item.LibrosID"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Modificar</a>
+        <a class="btn btn-outline-danger" onclick="EliminarLibro(@item.LibrosID)"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</a>
+    </td>
+</tr>
+    }
+
+</table>
+@section Scripts{
+    <script>
+        function EliminarLibro(libroID) {
+            var eliminar = confirm("¿Está seguro de eliminar a este libro?");
+            alert(eliminar);
+            if (eliminar == true) {
+                location.href = "../../Libros/DeleteConfirmed/" + libroID;
+            }
+        }
+    </script>
+}

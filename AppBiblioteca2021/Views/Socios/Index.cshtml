@@ -1,0 +1,70 @@
+﻿@model IEnumerable<AppBiblioteca2021.Models.Socios>
+
+<h2>Socios</h2>
+
+<p>
+    <a class="btn btn-outline-info" href="~/Socios/Create"><i class="fa fa-plus-square"></i> Nuevo Socio</a>
+</p>
+<table class="table table-bordered table-hover table-sm">
+    <tr style=" color: white; background-color: #401e19;">
+        <th>
+            @Html.DisplayNameFor(model => model.SociosNombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SociosApellido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SociosNombreCompleto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SociosDireccion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SociosTelefono)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SociosFechaNacimiento)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.SociosNombre)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.SociosApellido)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.SociosNombreCompleto)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.SociosDireccion)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.SociosTelefono)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.SociosFechaNacimiento)
+    </td>
+    <td class="text-right">
+        <a class="btn btn-outline-dark" href="~/Socios/Edit/@item.SociosID"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Modificar</a>
+        <a class="btn btn-outline-danger" onclick="EliminarSocio(@item.SociosID)"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</a>
+    </td>
+</tr>
+    }
+
+</table>
+@section Scripts{
+    <script>
+        function EliminarSocio(socioID) {
+            var eliminar = confirm("¿Está seguro de eliminar a este socio?");
+            alert(eliminar);
+            if (eliminar == true) {
+                location.href = "../../Socios/DeleteConfirmed/" + socioID;
+            }
+        }
+    </script>
+}

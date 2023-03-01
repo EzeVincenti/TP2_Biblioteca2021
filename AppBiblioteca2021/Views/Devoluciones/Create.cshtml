@@ -1,0 +1,197 @@
+﻿@model AppBiblioteca2021.Models.Devoluciones
+
+
+<h2>Confirmar devolución</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    //MODAL--------------------------------------------------------------------------------------------------------------
+
+    <div class="modal fade" id="modalNuevoLibro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="color:white; background-color: #897853;">
+                    <h5 class="modal-title" id="exampleModalLabel">Devolución de libros</h5>
+                    <button type="button" class="close" style="color:white;" data-dismiss="modal" aria-label="Cerrar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <label>Libros</label>
+                        @Html.DropDownList("LibrosID", null, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="modal-footer" style="color: white; background-color: #f8ede3;">
+                    <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Salir</button>
+                    <button type="button" class="btn btn-outline-success" onclick="DevolverLibro();"> Devolver Libro </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.DevolucionesFecha, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DevolucionesFecha, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DevolucionesFecha, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SociosID, "Socio", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("SociosID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.SociosID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        @*TABLA DE LIBROS PARA DEVOLVER----------------------------------------------------------------------------------------*@
+        <div>
+            <table class="table table-bordered table-hover table-sm">
+                <thead style="color: white; background-color: #897853;">
+                    <tr>
+                        @*<th scope="col">Nro. del Libro</th>*@
+                        <th scope="col"> Título del Libro </th>
+                        <th scope="col" class="text-center"><a class="btn btn-outline-light" data-toggle="modal" data-target="#modalNuevoLibro"> Buscar Libro </a></th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-libros"></tbody>
+            </table>
+        </div>
+
+
+        @*BOTONES--------------------------------------------------------------------------------------------------------------*@
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Confirmar" class="btn btn-outline-success" />
+                <a class="btn btn-outline-secondary" onclick="CancelarDevolucion();"> Cancelar </a>
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        //DEVOLVER LIBROS--------------------------------------------------------------------------------------------------------------
+
+        function DevolverLibro() {
+            var libroID = $('#LibrosID').val();
+
+            if (libroID != null) {
+                $.ajax({
+                    type: "POST",
+                    url: '../../Devoluciones/DevolverLibro',
+                    data: { LibrosID: libroID },
+                    success: function (resultado) {
+                        if (resultado == true) {
+                            $('#modalNuevoLibro').modal('hide');
+
+                            //BuscarLibros();
+                            location.href = "../../Devoluciones/Create";
+                        }
+                        else {
+                            alert("No se pudo devolver el libro, intente nuevamente.");
+                        }
+                    },
+                    error: function (result) {
+
+                    }
+                });
+            }
+        }
+
+        //BUSCA LOS LIBROS QUE ESTAN EN LA TABLA TEMPORAL PARA MOSTRARLOS EN LA VISTA--------------------------------------------
+
+        window.onload = BuscarLibros();
+
+        function BuscarLibros() {
+            $('#tbody-libros').empty();
+
+            $.ajax({
+                type: "POST",
+                url: '../../Devoluciones/BuscarLibros',
+                data: {},
+                success: function (listadoDevolucionesDetallesT) {
+                    $.each(listadoDevolucionesDetallesT, function (index, item) {
+                        $("#tbody-libros").append(
+                            "<tr>" +
+                            //"<td>" + item.LibrosID + "</td>" +
+                            "<td>" + item.LibrosTitulo + "</td>" +
+                            "<td class='text-center'><a class='btn btn-outline-danger' onclick='EliminarLibro("
+                            + item.DevolucionesDetallesTID + ");'> Quitar Libro </a></td>" +
+                            "</tr>"
+                        );
+
+                    })
+
+                },
+                error: function (result) {
+
+                },
+            });
+        }
+
+        //CANCELA DEVOLUCION------------------------------------------------------------------------------------------------
+
+        function CancelarDevolucion() {
+            $.ajax({
+                type: "POST",
+                url: '../../Devoluciones/CancelarDevolucion',
+                data: {},
+                success: function (resultado) {
+                    if (resultado == true) {
+                        location.href = "../../Devoluciones/Index";
+
+                    }
+                    else {
+                        alert("No se pudo cancelar la devolución del libro, intente nuevamente.");
+
+                    }
+                },
+                error: function (result) {
+
+                },
+            });
+        }
+
+        //ELIMINAR LIBRO DE LA TABLA----------------------------------------------------------------------------------------
+
+        function EliminarLibro(id) {
+            var eliminarLibro = confirm("¿Está seguro que desea eliminar el libro?");
+            if (eliminarLibro == true) {
+                $.ajax({
+                    type: "POST",
+                    url: '../../Devoluciones/EliminarLibro',
+                    data: { DevolucionesDetallesTID: id },
+                    success: function (resultado) {
+                        if (resultado == true) {
+                            //BuscarLibros();
+
+                            location.href = "../../Devoluciones/Create";
+                        }
+                        else {
+                            alert("No se pudo eliminar el libro, intente nuevamente.");
+                        }
+                    },
+                    error: function (result) {
+
+                    },
+                });
+            }
+
+        }
+    </script>
+}
